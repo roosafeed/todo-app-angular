@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="body-bg">
+    <div id="login-main" class="frosted-bg vertical-center-abs">
+        <h2>
+            Login
+        </h2>
+        <h3>
+            <a routerLink="home">< Go Back</a>
+        </h3>
+        <div id="login-form">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" [(ngModel)]="userObj.username" />
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" [(ngModel)]="userObj.password" />
+
+            <div>
+                <button (click)="login()">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

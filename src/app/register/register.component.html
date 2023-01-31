@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div class="body-bg">
+    <div id="register-main" class="frosted-bg vertical-center-abs">
+        <h2>
+            Register
+        </h2>
+        <h3>
+            <a routerLink="home">< Go Back</a>
+        </h3>
+        <div id="register-form">
+            <label for="register-fname">First Name</label>
+            <input type="text" id="register-fname" [(ngModel)]="userObj.fname" />
+
+            <label for="register-lname">Last Name</label>
+            <input type="text" id="register-lname" [(ngModel)]="userObj.lname" />
+
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" [(ngModel)]="userObj.email" />
+
+            <label for="register-username">Username</label>
+            <input type="text" id="register-username" [(ngModel)]="userObj.username" />
+
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" [(ngModel)]="userObj.password" />
+
+            <div>
+                <button (click)="register()">Register</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+div#register-main {    
+    width: 40vw;
+    min-width: 400px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+}
+
+div#register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+}
+
+div#register-form > * {
+    margin: 2px 4px;
+}
+
+div#register-form > input {
+    margin-bottom: 10px;
+}

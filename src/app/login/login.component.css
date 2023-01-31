@@ -1,0 +1,26 @@
+div#login-main {    
+    width: 40vw;
+    min-width: 400px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+}
+
+div#login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+}
+
+div#login-form > * {
+    margin: 2px 4px;
+}
+
+div#login-form > input {
+    margin-bottom: 10px;
+}

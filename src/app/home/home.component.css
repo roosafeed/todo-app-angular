@@ -2,39 +2,14 @@
 #40414F 
 */
 
-div#home-div {
-    background: var(--background-body);
-    background: url('../../assets/img/city_transparent_color.png') center;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
 div#home-main {
     margin: auto;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0 20px;
-    box-shadow: 0 0 5rem rgb(0 0 0 / 20%);
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, .15);    
-    backdrop-filter: blur(5px);
     margin-left: 10px;
 }
 
 div#home-main > h1 {
     font-size: 8vw;
     margin: 0;
-}
-
-div#home-main > h3 {
-    font-size: 4vw;
-    margin: 0;
-    font-weight: 100;
 }
 
 div#home-main a {
