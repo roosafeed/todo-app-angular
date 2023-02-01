@@ -14,7 +14,7 @@
             <input type="password" id="login-password" [(ngModel)]="userObj.password" />
 
             <div>
-                <button (click)="login()">Login</button>
+                <button [disabled]="isLogginButtonDisabled" (click)="login()">Login</button>
             </div>
         </div>
     </div>

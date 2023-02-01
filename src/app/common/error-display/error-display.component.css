@@ -1,0 +1,27 @@
+div#error-main {
+    position: absolute;
+    top: 10px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    z-index: 100;
+    width: 80%;
+    left: 10%;
+    right: 10%;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div#error-main > #msg-close {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}

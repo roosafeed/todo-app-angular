@@ -16,7 +16,7 @@ body, html {
     margin: 0;
     background-color: var(--background-body);
     color: white;
-
+    height: 100%;
 }
 
 h2 {
@@ -39,10 +39,10 @@ button {
     border-color: var(--accent-blue);
 }
 
-button:hover {
-    /* color: var(--accent-blue);
-    background-color: white;
-    border-color: white; */
+button:disabled {
+    color: var(--accent-blue);
+    background-color: var(--frost-grey);
+    border-color: white;
 }
 
 div.body-bg {
@@ -51,7 +51,7 @@ div.body-bg {
     background-size: cover;
     width: 100vw;
     height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 }

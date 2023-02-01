@@ -1,1 +1,8 @@
-<p *ngIf="isVisible">{{errorMsg}}</p>
+<div id="error-main" *ngIf="isVisible">
+    <p>
+        {{errorMsg}}
+    </p> 
+    <span id="msg-close" (click)="closePopup()">
+        <img src="../../../assets/img/close_FILL0_wght400_GRAD0_opsz48.svg" alt="close alert" />
+    </span>       
+</div>
