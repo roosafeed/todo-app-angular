@@ -25,7 +25,7 @@ export class LoginComponent {
     if(this.userObj.username == null || this.userObj.password == null ||
       this.userObj.username.length == 0 || this.userObj.password.length == 0) {
         this.messageService.setErrorMessage("username/password cannot be empty");
-        console.log("username/password cannot be empty");
+        console.log("Username and Password cannot be empty");
         this.isLogginButtonDisabled = false;
         return;
     }

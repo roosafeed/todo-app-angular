@@ -1,0 +1,19 @@
+<div class="body-bg">
+
+    <div id="verification-main" class="frosted-bg center-rel">
+        <div *ngIf="verified" id="verification-success">
+            <h2>
+                Verified
+            </h2>
+            <p>Proceed to login and use the app</p>
+            <button routerLink="/login">Login</button>
+        </div>      
+        
+        <div *ngIf="!verified" id="verification-error">
+            <h2>
+                Error
+            </h2>
+            <p>{{error}}</p>
+        </div>  
+    </div>   
+</div>

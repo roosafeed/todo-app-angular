@@ -12,6 +12,7 @@ import { TodoComponent } from './user-pages/todo/todo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
+import { UserVerifyComponent } from './user-verify/user-verify.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     ErrorDisplayComponent,
-    TodoComponent
+    TodoComponent,
+    UserVerifyComponent
   ],
   imports: [
     BrowserModule,

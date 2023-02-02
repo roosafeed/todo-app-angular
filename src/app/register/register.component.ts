@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../models/user.model';
+import { MessagingService } from '../services/messaging.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -9,17 +11,31 @@ import { User } from '../models/user.model';
 export class RegisterComponent {
   userObj: User;
 
-  constructor() {
+  constructor(
+    private messageService: MessagingService,
+    private userService: UserService
+  ) {
     this.userObj = new User();
   }
 
   register():void {
-    if(this.userObj.username == null || this.userObj.password == null ||
-      this.userObj.username.length == 0 || this.userObj.password.length == 0) {
-        console.log("username/password cannot be empty");
+    let isValid: boolean = true;
+    Object.values(this.userObj).forEach(v => {
+      isValid = isValid && (v != null && v.length != 0);
+    });
+
+    if(!isValid) {
+        this.messageService.setErrorMessage("All fields are required!");
         return;
       }
 
-    console.log(this.userObj);
+    this.userService.register(this.userObj).subscribe({
+      next: (data) => {
+        this.messageService.setErrorMessage("Registered successfully. A verification link is sent to the email address used while registering the account");
+      },
+      error: (err) => {
+        this.messageService.setErrorMessage(err.message);
+      }
+    });
   }
 }

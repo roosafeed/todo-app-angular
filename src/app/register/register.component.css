@@ -1,10 +1,6 @@
 div#register-main {    
     width: 40vw;
     min-width: 400px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-left: 10px;
 }
 
 div#register-form {

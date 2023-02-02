@@ -1,0 +1,5 @@
+div#verification-main {
+    width: 50%;
+    min-width: max-content;
+    padding: 20px;
+}

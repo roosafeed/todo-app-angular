@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './user-pages/todo/todo.component';
+import { UserVerifyComponent } from './user-verify/user-verify.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: "register",
     component: RegisterComponent
+  },
+  {
+    path: "verify/:code",
+    component: UserVerifyComponent
   },
   {
     path: "**",

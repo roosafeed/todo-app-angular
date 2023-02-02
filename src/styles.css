@@ -64,10 +64,11 @@ div.frosted-bg {
     border-radius: 5px;
 }
 
-.vertical-center-abs {
-    position: absolute;
+.center-rel {
+    position: relative;
     top: 50%;
-    transform: translateY(-50%);    
+    transform: translateY(-50%);  
+    margin: 0 auto;  
 }
 
 input[type="text"],
