@@ -5,12 +5,29 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class MessagingService {
-  private errorMessageSubject = new BehaviorSubject<string>("");
-  errorMessage = this.errorMessageSubject.asObservable();
+  private messageSubject = new BehaviorSubject<MessageModel>(new MessageModel());
+  message = this.messageSubject.asObservable();
 
   constructor() { }
 
-  setErrorMessage(msg: string) {
-    this.errorMessageSubject.next(msg);
+  setMessage(msg: MessageModel) {
+    this.messageSubject.next(msg);
   }
+}
+
+export class MessageModel {
+  public type: messageCodes | null;
+  public message: string | null;
+
+  constructor(type: messageCodes|null = null,
+    message: string|null = null) {
+      this.type = type;
+      this.message = message
+    }
+}
+
+export enum messageCodes{
+  ERROR,
+  WARN,
+  SUCCESS
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpError } from '../models/http-error.model';
 import { User } from '../models/user.model';
-import { MessagingService } from '../services/messaging.service';
+import { messageCodes, MessageModel, MessagingService } from '../services/messaging.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -24,7 +24,8 @@ export class LoginComponent {
 
     if(this.userObj.username == null || this.userObj.password == null ||
       this.userObj.username.length == 0 || this.userObj.password.length == 0) {
-        this.messageService.setErrorMessage("username/password cannot be empty");
+        const msg: MessageModel = new MessageModel(messageCodes.ERROR, "username/password cannot be empty");
+        this.messageService.setMessage(msg);
         console.log("Username and Password cannot be empty");
         this.isLogginButtonDisabled = false;
         return;
@@ -38,7 +39,8 @@ export class LoginComponent {
         },
         error: (err) => {
           console.log(JSON.stringify(err));
-          this.messageService.setErrorMessage(err.message);
+          const msg: MessageModel = new MessageModel(messageCodes.ERROR, err.message);
+          this.messageService.setMessage(msg);
         }
       }
     ).add(() => {

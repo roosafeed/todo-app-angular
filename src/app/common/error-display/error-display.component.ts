@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { MessagingService } from 'src/app/services/messaging.service';
+import { messageCodes, MessagingService } from 'src/app/services/messaging.service';
 
 @Component({
   selector: 'app-error-display',
@@ -9,16 +9,22 @@ import { MessagingService } from 'src/app/services/messaging.service';
   styleUrls: ['./error-display.component.css']
 })
 export class ErrorDisplayComponent implements OnInit {
-  errorMsg: string = "";
+  errorMsg: string|null = "";
   isVisible: boolean = false;
+  codeClass: string = "";
 
   constructor(private messageService: MessagingService,
     private router: Router) {}
   
   ngOnInit() {
-    this.messageService.errorMessage.subscribe(msg => {
-      this.errorMsg = msg;
+    this.messageService.message.subscribe(msg => {
+      this.errorMsg = msg.message;
       this.isVisible = true;
+      switch(msg.type) {
+        case messageCodes.ERROR: this.codeClass = "msg-error"; break;
+        case messageCodes.SUCCESS: this.codeClass = "msg-success"; break;
+        case messageCodes.WARN: this.codeClass = "msg-warn"; break;
+      }
     });
 
     this.router.events.pipe(
@@ -31,5 +37,7 @@ export class ErrorDisplayComponent implements OnInit {
   closePopup():void {
     this.isVisible = false;
     this.errorMsg = "";
+    this.codeClass = "";
+
   }
 }

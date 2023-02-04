@@ -7,13 +7,12 @@ div#error-main {
     width: 80%;
     left: 10%;
     right: 10%;
-    background-color: #f44336; /* Red */
-    color: white;
     margin-bottom: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 4px 4px 10px -1px var(--shadow-color);
 }
 
 div#error-main > #msg-close {
@@ -24,4 +23,19 @@ div#error-main > #msg-close {
     font-size: 22px;
     line-height: 20px;
     cursor: pointer;
+}
+
+.msg-warn {
+    background-color: var(--warn-bg-color);
+    color: var(--warn-text-color);
+}
+
+.msg-success {
+    background-color: var(--success-bg-color);
+    color: var(--success-text-color);
+}
+
+.msg-error {
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
 }

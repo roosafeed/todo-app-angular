@@ -4,6 +4,13 @@
     --accent-blue: #005fae;
     --background-body: #1a1c1e;
     --frost-grey: rgba(255, 255, 255, .15);
+    --error-bg-color: #93000a;
+    --error-text-color: #ffdad6;
+    --success-bg-color: #00930a;
+    --success-text-color: #daffd6;
+    --warn-bg-color: #ffb4ab;
+    --warn-text-color: #690005;
+    --shadow-color: #1a1c1ea0;
   }
 
 * {

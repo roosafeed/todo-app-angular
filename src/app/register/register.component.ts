@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '../models/user.model';
-import { MessagingService } from '../services/messaging.service';
+import { messageCodes, MessageModel, MessagingService } from '../services/messaging.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -25,16 +25,19 @@ export class RegisterComponent {
     });
 
     if(!isValid) {
-        this.messageService.setErrorMessage("All fields are required!");
-        return;
-      }
+      const msg: MessageModel = new MessageModel(messageCodes.ERROR, "All fields are required!");
+      this.messageService.setMessage(msg);
+      return;
+    }
 
     this.userService.register(this.userObj).subscribe({
       next: (data) => {
-        this.messageService.setErrorMessage("Registered successfully. A verification link is sent to the email address used while registering the account");
+        const msg: MessageModel = new MessageModel(messageCodes.SUCCESS, "Registered successfully. A verification link is sent to the email address used while registering the account")
+        this.messageService.setMessage(msg);
       },
       error: (err) => {
-        this.messageService.setErrorMessage(err.message);
+        const msg: MessageModel = new MessageModel(messageCodes.ERROR, err.message);
+        this.messageService.setMessage(msg);
       }
     });
   }

@@ -5,7 +5,7 @@ import { User } from '../models/user.model';
 import { HttpError } from '../models/http-error.model';
 import { CookieService } from 'ngx-cookie-service';
 
-const BASE_URL = "https://todo-server.deta.dev";
+const BASE_URL = "https://todo-server.deta.dev/user";
 const AUTH_COOKIE = "user-auth-cookie";
 
 @Injectable({
