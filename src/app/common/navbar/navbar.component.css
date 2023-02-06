@@ -23,7 +23,12 @@
     margin-left: 20px;
     font-size: 1.5em;
     text-decoration: none;
-    color: #fff;
+    color: #fff;    
+  }
+
+  .logo > img {
+    height: 45px;
+    filter: brightness(0) drop-shadow(2px 3px 2px var(--shadow-color));
   }
   
   .navbar-right {
