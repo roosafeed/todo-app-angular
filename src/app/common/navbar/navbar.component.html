@@ -1,0 +1,14 @@
+<header>
+    <nav class="navbar">
+      <a routerLink="/" class="logo">Logo</a>
+      <ul class="navbar-right">
+        <li *ngIf="!isLoggedIn"><a routerLink="login" routerLinkActive="active">Login</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="register" routerLinkActive="active">Register</a></li>
+        <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div *ngIf="isLoading" id="loading-bar">
+    <div></div>
+  </div>

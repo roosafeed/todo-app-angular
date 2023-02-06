@@ -13,11 +13,21 @@ constructor(private userService: UserService,
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-      let isAuthenticated = this.userService.isAuthenticated();
+      const isAuthenticated = this.userService.isAuthenticated();
+      const path = route.url[0].path;
       if(isAuthenticated) {
-        return true;
+        if(path == 'login' || path == 'register') {
+          this.router.navigate(['/dashboard']);
+          return false;
+        }
+        else {
+          return true;
+        }
       }
       else {
+        if(path == 'login' || path == 'register') {          
+          return true;
+        }
         this.router.navigate(['/login']);
         return false;
       }

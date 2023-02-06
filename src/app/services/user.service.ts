@@ -12,8 +12,6 @@ const AUTH_COOKIE = "user-auth-cookie";
   providedIn: 'root'
 })
 export class UserService {
-  private isUserAuthenticated: boolean = true;
-
   constructor(
     private http: HttpClient,
     private cookieService: CookieService
@@ -93,7 +91,7 @@ export class UserService {
       this.cookieService.delete(AUTH_COOKIE);
     }
     this.cookieService.set(AUTH_COOKIE, JSON.stringify(data), {
-      expires: new Date(Date.now() + 5*(1000*60*60)),
+      expires: new Date(Date.now() + 2*(1000*60*60)),
       secure: true
     });
   }

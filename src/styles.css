@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --accent-blue: #005fae;
-    --accent-blue: #005fae;
     --background-body: #1a1c1e;
     --frost-grey: rgba(255, 255, 255, .15);
     --error-bg-color: #93000a;
@@ -11,6 +10,7 @@
     --warn-bg-color: #ffb4ab;
     --warn-text-color: #690005;
     --shadow-color: #1a1c1ea0;
+    --disabled-gray: #6d6d6d;
   }
 
 * {
@@ -56,7 +56,7 @@ div.body-bg {
     background: var(--background-body);
     background: url('assets/img/city_transparent_color.png') center;
     background-size: cover;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: absolute;
     top: 0;

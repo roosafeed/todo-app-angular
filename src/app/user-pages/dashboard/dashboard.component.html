@@ -1,0 +1,11 @@
+<div id="dashboard-main">
+    <div *ngFor="let record of records; index as i" [ngStyle]="{'background-color': record.color + '55'}" routerLink="/todo/{{record.key}}" >
+        <span class="item-header-span" [ngStyle]="{'background-color': record.color}"></span>
+        <h3>{{record.title}}</h3>
+        <ol>
+            <li *ngFor="let item of record.items; index as j" [class]="item.isComplete? 'item-done': ''">
+                <span>{{item.name}}</span>
+            </li>
+        </ol>
+    </div>
+</div>

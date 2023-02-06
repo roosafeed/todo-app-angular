@@ -20,7 +20,6 @@ export class UserVerifyComponent implements OnInit {
         const code = params['code'];
         this.userService.verify(code).subscribe({
           next: (val) => {
-            console.log(val.msg);
             if(parseInt(val.code) == 200) {
               this.verified = true;
             }

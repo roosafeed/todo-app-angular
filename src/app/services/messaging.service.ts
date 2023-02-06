@@ -8,10 +8,17 @@ export class MessagingService {
   private messageSubject = new BehaviorSubject<MessageModel>(new MessageModel());
   message = this.messageSubject.asObservable();
 
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  loading = this.loadingSubject.asObservable();
+
   constructor() { }
 
   setMessage(msg: MessageModel) {
     this.messageSubject.next(msg);
+  }
+
+  setLoading(loading: boolean) {
+    this.loadingSubject.next(loading);
   }
 }
 

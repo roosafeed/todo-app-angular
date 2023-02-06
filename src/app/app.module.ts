@@ -11,8 +11,12 @@ import { ErrorDisplayComponent } from './common/error-display/error-display.comp
 import { TodoComponent } from './user-pages/todo/todo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserVerifyComponent } from './user-verify/user-verify.component';
+import { DashboardComponent } from './user-pages/dashboard/dashboard.component';
+import { NavbarComponent } from './common/navbar/navbar.component';
+import { AuthInterceptor } from './services/interceptor/auth.interceptor';
+import { LoadingInterceptor } from './services/interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { UserVerifyComponent } from './user-verify/user-verify.component';
     RegisterComponent,
     ErrorDisplayComponent,
     TodoComponent,
-    UserVerifyComponent
+    UserVerifyComponent,
+    DashboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,10 @@ import { UserVerifyComponent } from './user-verify/user-verify.component';
     DragDropModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
