@@ -1,6 +1,10 @@
 <header>
     <nav class="navbar">
-      <a routerLink="/" class="logo"><img src="../../../favicon.ico" alt="Logo"></a>
+      <ul>
+        <li><a id="back-button" (click)="goBack()"><img src="../../../assets/img/expand_more_FILL0_wght400_GRAD0_opsz48.svg" alt="Logo"></a></li>
+        <li><a routerLink="/" class="logo"><img src="../../../favicon.ico" alt="Logo"></a></li>
+      </ul>      
+      
       <ul class="navbar-right">
         <li *ngIf="!isLoggedIn"><a routerLink="login" routerLinkActive="active">Login</a></li>
         <li *ngIf="!isLoggedIn"><a routerLink="register" routerLinkActive="active">Register</a></li>

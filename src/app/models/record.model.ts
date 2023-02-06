@@ -1,11 +1,11 @@
 export class ToDoRecord {
-    public key: string;
+    public key: string|null;
     public title: string;
     public color: string;
     public items: RecordItem[];
 
     constructor(
-        key: string,
+        key: string|null = null,
         title: string = '',
         color: string = '#005fae',
         items: RecordItem[] = []
@@ -18,13 +18,13 @@ export class ToDoRecord {
 }
 
 export class RecordItem {
-    public name: string;
+    public name: string|null;
     public completeBy: string | null;
     public isComplete: boolean;
     public order: number;
 
     constructor(        
-        name: string = '',
+        name: string|null = null,
         completeBy: string|null = null,
         isComplete: boolean = false,
         order: number = 1

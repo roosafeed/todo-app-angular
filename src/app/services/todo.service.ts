@@ -31,6 +31,13 @@ export class TodoService {
     )
   }
 
+  createRecord(record: ToDoRecord): Observable<any | HttpError> {
+    record.key = null;
+    return this.http.post<any>(BASE_URL + '/create', record).pipe(
+      catchError(this.handleError)
+    )
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMsg: HttpError = new HttpError();

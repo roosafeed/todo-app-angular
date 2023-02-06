@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoadingInterceptor } from 'src/app/services/interceptor/loading.interceptor';
 import { MessagingService } from 'src/app/services/messaging.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,11 +15,17 @@ export class NavbarComponent implements OnInit {
   loadingSubscription: Subscription | undefined;
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
+  canGoBack: boolean = false;
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private messageService: MessagingService) {}  
+    private messageService: MessagingService,
+    private location: Location) {
+      location.onUrlChange(() => {
+        this.canGoBack = !!router.getCurrentNavigation()?.previousNavigation;
+      });
+    }  
   
   ngOnInit(): void {
     this.routerSubscription = this.router.events.subscribe((event) => {
@@ -41,11 +47,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.routerSubscription?.unsubscribe();
-    // this.loadingSubscription?.unsubscribe();
+    this.loadingSubscription?.unsubscribe();
   }
 
   logout(): void {
     this.userService.logout();
     this.router.navigate(['/']);
+  }
+
+  goBack(): void {
+    if(this.canGoBack) {
+      this.location.back();
+    }
   }
 }
