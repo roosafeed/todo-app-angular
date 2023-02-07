@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecordResp } from 'src/app/models/record-resp.model';
-import { ToDoRecord } from 'src/app/models/record.model';
+import { RecordItem, ToDoRecord } from 'src/app/models/record.model';
 import { messageCodes, MessageModel, MessagingService } from 'src/app/services/messaging.service';
 import { TodoService } from 'src/app/services/todo.service';
 
@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   records: ToDoRecord[] = [];
   newRecord: ToDoRecord = new ToDoRecord();
   newRecordModalActive: boolean = false;
+  hasItemErrors: boolean = false;
 
   constructor(private todoService: TodoService,
     private messageService: MessagingService) {}
@@ -40,8 +41,20 @@ export class DashboardComponent implements OnInit {
   createRecord(): void {
     if(this.newRecord.title == null || this.newRecord.title == '') {
       const msg = new MessageModel(messageCodes.WARN, 'Name cannot be empty');
-        this.messageService.setMessage(msg);
-        return;
+      this.messageService.setMessage(msg);
+      return;
+    }
+    let itemsValid = true;
+    this.newRecord.items.forEach((item) => {
+      if(item.name == null || item.name == '') {        
+        itemsValid = false;
+      }
+    });
+
+    if(!itemsValid) {
+      const msg = new MessageModel(messageCodes.WARN, 'List item cannot be empty');
+      this.messageService.setMessage(msg);
+      return;
     }
     
     this.todoService.createRecord(this.newRecord).subscribe({
@@ -67,5 +80,31 @@ export class DashboardComponent implements OnInit {
   closeNewRecordModal(): void {
     this.newRecordModalActive = false;
     this.newRecord = new ToDoRecord();
+  }
+
+  addItem(name: string):void {
+    if(name != null && name != '' && name.length != 0) {
+      const order = this.newRecord.items.length + 1;
+      const item = new RecordItem(name, null, false, order);
+      this.newRecord.items.push(item)
+    }    
+    console.log(this.newRecord);
+    
+  }
+
+  deleteItem(ind: number) {
+    this.newRecord.items.splice(ind, 1);
+    this.newRecord.items.forEach((item, ind) => {
+      item.order = ind + 1;
+    })
+  }
+
+  validateTextInput(value: string|null) {
+    if(value == null || value == '') {
+      this.hasItemErrors = true;
+    }
+    else {
+      this.hasItemErrors = false;
+    }
   }
 }

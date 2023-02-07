@@ -106,6 +106,15 @@ input[type="password"]:focus {
     font-weight: 600;
 } 
 
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    opacity: 0.8;
+    color: var(--background-body);
+    font-weight: 200;
+    font-size: 0.75em;
+}
+
 input[data-autocompleted] {
     background-color: transparent !important;
 }

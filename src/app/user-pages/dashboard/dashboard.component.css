@@ -17,6 +17,7 @@
     overflow: hidden;
     overflow-wrap: break-word;
     cursor: pointer;
+    box-shadow: inset 0px -18px 25px var(--shadow-color);
 }
 
 #dashboard-list > div:hover {
@@ -84,10 +85,10 @@ div#dashboard-new-list-cover {
 div#dashboard-new-list {
     width: 60%;
     padding: 20px;
-    position: fixed;
+    position: relative;
     z-index: 102;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 30%;
+    transform: translate(-50%, -70%);
     left: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -177,4 +178,30 @@ div#new-list-color > label > input[type="radio"]::before {
 
 div#new-list-color > label > input[type="radio"]:checked {
     border: 0.15em solid #fff;
+}
+
+div#new-list-items {
+    width: 100%;
+}
+
+div.new-list-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+div.new-list-item img {
+    cursor: pointer;
+}
+
+div#new-list-items-add {
+    border-top: dotted 1px var(--background-body);
+}
+
+.error-text {
+    color: var(--error-text-color);
+    font-weight: 200;
 }

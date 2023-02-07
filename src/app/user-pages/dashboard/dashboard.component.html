@@ -26,13 +26,35 @@
     </h2>    
     <div id="dashboard-new-list-form">
         <label for="new-list-name">Name</label>
-        <input type="text" id="new-list-name" [(ngModel)]="newRecord.title" />
+        <input type="text" id="new-list-name" [(ngModel)]="newRecord.title" autocomplete="disabled" />
 
         <label for="new-list-color">Colour</label>
         <div id="new-list-color">
             <label *ngFor="let c of colors">
                 <input class="color" name="new-list-color" type="radio" [(ngModel)]="newRecord.color" [value]="c" [ngStyle]="{'--select-color': c}"  />
             </label>
+        </div>
+        <label for="new-list-name">Items</label>
+        <div *ngIf="hasItemErrors">
+            <p class="error-text">Error: List items cannot be empty</p>
+        </div>
+        <div id="new-list-items">
+            <div *ngFor="let item of newRecord.items; index as i;" class="new-list-item">
+                <input type="text" [(ngModel)]="newRecord.items[i].name" autocomplete="disabled" (change)="validateTextInput(newRecord.items[i].name)" required>
+                <h2>
+                    <span (click)="deleteItem(i)">
+                        <img src="../../../assets/img/remove_FILL0_wght400_GRAD0_opsz48.svg" alt="delete">
+                    </span>
+                </h2>
+            </div>
+            <div id="new-list-items-add" class="new-list-item">
+                <input name="input" type="text" id="new-list-items-add-input" placeholder="New item" autocomplete="disabled" #newItemName>
+                <h2>
+                    <span (click)="addItem(newItemName.value);newItemName.value=''">
+                        <img src="../../../assets/img/add_FILL0_wght400_GRAD0_opsz48.svg" alt="add">
+                    </span>
+                </h2>
+            </div>            
         </div>
 
         <div>
