@@ -1,10 +1,21 @@
-<div id="dashboard-main">
+<div id="dashboard-main" [ngStyle]="{'position': newRecordModalActive? 'fixed' : 'initial'}">
     <div id="dashboard-controls">
-        <button (click)="openNewRecordModal()">New <img src="../../../assets/img/add_FILL0_wght400_GRAD0_opsz48.svg" alt="add"></button>
+        <button id="dashboard-bttn-add" (click)="openNewRecordModal()" [disabled]="selectionMode? 'disabled' : ''">New 
+            <img src="../../../assets/img/add_FILL0_wght400_GRAD0_opsz48.svg" alt="add">
+        </button>
+        <button id="dashboard-bttn-sel" (click)="selectionClick()"> 
+            <img *ngIf="!selectionMode" src="../../../assets/img/check_box_outline_blank_FILL0_wght400_GRAD0_opsz48.svg" alt="delete">
+            <img *ngIf="selectionMode" src="../../../assets/img/check_box_FILL0_wght400_GRAD0_opsz48.svg" alt="delete">
+        </button>
+        <button *ngIf="selectionMode" id="dashboard-bttn-del" (click)="deleteSelectedRecords()" 
+        [disabled]="selectionMode && selectedKeys.size > 0 ? '' : 'disabled'">Delete 
+            <img src="../../../assets/img/delete_forever_FILL0_wght400_GRAD0_opsz48.svg" alt="delete">
+        </button>
     </div>
 
     <div id="dashboard-list">
-        <div *ngFor="let record of records; index as i" [ngStyle]="{'background-color': record.color + '55', '--user-color': record.color}" routerLink="/todo/{{record.key}}">
+        <div #thisEl *ngFor="let record of records; index as i" [ngStyle]="{'background-color': record.color + '55', '--user-color': record.color}" 
+        (click)="listClick(thisEl, record.key)">
             <span class="item-header-span" [ngStyle]="{'background-color': record.color}"></span>
             <h3>{{record.title}}</h3>
             <ol>
@@ -16,7 +27,6 @@
     </div>
 </div>
 
-<div id="dashboard-new-list-cover" *ngIf="newRecordModalActive" (click)="closeNewRecordModal()"></div>
 <div id="dashboard-new-list" class="frosted-bg" *ngIf="newRecordModalActive">
     <h2>
         New List
@@ -63,4 +73,9 @@
         </div>
     </div>
 </div>
+
+<br><br><br><br>
+
+<div id="dashboard-new-list-cover" *ngIf="newRecordModalActive" (click)="closeNewRecordModal()"></div>
+
 

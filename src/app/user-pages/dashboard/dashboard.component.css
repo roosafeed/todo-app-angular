@@ -7,7 +7,7 @@
 
 #dashboard-list > div {
     border: solid 2px var(--user-color);
-    margin: 5px;
+    margin: 8px;
     padding: 10px;
     border-radius: 10px;
     flex: 1 1 0px;
@@ -20,8 +20,19 @@
     box-shadow: inset 0px -18px 25px var(--shadow-color);
 }
 
+#dashboard-list > div > ol {
+    padding-left: 25px;
+}
+
 #dashboard-list > div:hover {
     border-color: #fff;
+    scale: 1.055;
+    box-shadow: inset 0px -10px 18px var(--shadow-color);
+}
+
+#dashboard-list > div.selected {
+    border-color: #fff;
+    scale: 1.03;
 }
 
 #dashboard-list > div > span.item-header-span {
@@ -51,6 +62,12 @@
 
 /* controls */
 
+div#dashboard-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 div#dashboard-controls > button {
     display: flex;
     align-items: center;
@@ -59,16 +76,30 @@ div#dashboard-controls > button {
     cursor: pointer;
 }
 
-div#dashboard-controls > button > img {
-    filter: invert(1);
-}
-
 div#dashboard-controls > button:hover {
     filter: drop-shadow(2px 4px 6px var(--shadow-color));
 }
 
-div#dashboard-controls > button:hover > img {
+div#dashboard-controls > button#dashboard-bttn-del {
+    background-color: var(--error-bg-color);
+    border-color: var(--error-bg-color);
+}
+
+div#dashboard-controls > button#dashboard-bttn-add:hover > img {
     transform: rotate(90deg);
+}
+
+div#dashboard-controls > button:disabled {
+    color: #fff;
+    filter: brightness(0.5);
+}
+
+div#dashboard-controls > button#dashboard-bttn-add:disabled:hover > img {
+    transform: rotate(0deg);
+}
+
+div#dashboard-controls > button > img {
+    filter: invert(1);
 }
 
 /* new record form */
@@ -85,10 +116,10 @@ div#dashboard-new-list-cover {
 div#dashboard-new-list {
     width: 60%;
     padding: 20px;
-    position: relative;
+    position: absolute;
     z-index: 102;
-    top: 30%;
-    transform: translate(-50%, -70%);
+    top: 0%;
+    transform: translateX(-50%);
     left: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -96,6 +127,17 @@ div#dashboard-new-list {
     align-content: center;
     justify-content: center;
     align-items: center;
+    height: max-content;
+}
+
+div#dashboard-new-list::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background: transparent;
+    bottom: -10%;
+    z-index: 90;
 }
 
 div#dashboard-new-list > h2 {

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, forkJoin, map, Observable, throwError } from 'rxjs';
 import { HttpError } from '../models/http-error.model';
 import { RecordResp } from '../models/record-resp.model';
 import { ToDoRecord } from '../models/record.model';
@@ -36,6 +36,37 @@ export class TodoService {
     return this.http.post<any>(BASE_URL + '/create', record).pipe(
       catchError(this.handleError)
     )
+  }
+
+  deleteMany(keys: string[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let result: {
+        success: string[],
+        fail: string[]
+      } = {success: [], fail: []};
+
+      let requests: Observable<any>[] = [];
+      keys.forEach((key) => {
+        requests.push(this.http.delete(BASE_URL + `/delete/${key}`));
+      })
+
+      forkJoin(requests).subscribe({
+        next: (data) => {
+          data.forEach((d, ind) => {
+            if(d) {
+              result.success.push(keys[ind]);
+            }
+            else {
+              result.fail.push(keys[ind]);
+            }
+          });
+          resolve(result);
+        },
+        error: (err) => {
+          reject(err);
+        }
+      })
+    });
   }
 
 

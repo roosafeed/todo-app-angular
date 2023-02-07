@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecordResp } from 'src/app/models/record-resp.model';
 import { RecordItem, ToDoRecord } from 'src/app/models/record.model';
 import { messageCodes, MessageModel, MessagingService } from 'src/app/services/messaging.service';
@@ -15,9 +16,12 @@ export class DashboardComponent implements OnInit {
   newRecord: ToDoRecord = new ToDoRecord();
   newRecordModalActive: boolean = false;
   hasItemErrors: boolean = false;
+  selectionMode: boolean = false;
+  selectedKeys: Map<string, HTMLElement> = new Map();
 
   constructor(private todoService: TodoService,
-    private messageService: MessagingService) {}
+    private messageService: MessagingService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.getAllRecords();
@@ -73,6 +77,32 @@ export class DashboardComponent implements OnInit {
     })    
   }
 
+  deleteSelectedRecords(): void {
+    if(this.selectionMode && this.selectedKeys.size > 0) {
+      const keys: string[] = Array.from(this.selectedKeys.keys());
+      this.todoService.deleteMany(keys.filter((key) => {return key != 'null'}))
+      .then((resp) => {
+        console.log(resp);
+        this.getAllRecords();
+        this.selectedKeys.clear();
+        if(resp.fail.length > 0) {
+          const msg: MessageModel = new MessageModel(messageCodes.WARN, "Some records were not deleted");
+          this.messageService.setMessage(msg);
+        }
+        else {
+          const msg: MessageModel = new MessageModel(messageCodes.SUCCESS,  `${resp.success.length} records deleted successfully`);
+          this.messageService.setMessage(msg);
+        }
+        
+      })
+      .catch((err) => {
+        console.log(err);        
+        const msg: MessageModel = new MessageModel(messageCodes.ERROR, "Something happened while trying to delete");
+        this.messageService.setMessage(msg);       
+      })
+    }
+  }
+
   openNewRecordModal(): void {
     this.newRecordModalActive = true;
   }
@@ -107,4 +137,30 @@ export class DashboardComponent implements OnInit {
       this.hasItemErrors = false;
     }
   }
+
+  listClick(elem: HTMLElement, key: string|null) {
+    if(!this.selectionMode) {
+      this.router.navigate(['todo', key])
+    }
+    else {
+      if(elem.classList.toggle('selected')) {
+        let k = key? key : 'null';
+        this.selectedKeys.set(k, elem);
+      }
+      else {
+        this.selectedKeys.delete(key? key:'null');
+      }      
+    }
+  }
+
+  selectionClick() {
+    this.selectionMode = !this.selectionMode;
+    if(!this.selectionMode) {
+      this.selectedKeys.forEach((el, k) => {
+        el.classList.remove('selected');
+        this.selectedKeys.delete(k);
+      })
+    }
+  }
+
 }
