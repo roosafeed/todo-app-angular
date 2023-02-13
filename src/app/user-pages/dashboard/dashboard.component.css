@@ -18,6 +18,7 @@
     overflow-wrap: break-word;
     cursor: pointer;
     box-shadow: inset 0px -18px 25px var(--shadow-color);
+    scale: 1;
 }
 
 #dashboard-list > div > ol {
@@ -33,6 +34,30 @@
 #dashboard-list > div.selected {
     border-color: #fff;
     scale: 1.03;
+}
+
+#dashboard-list > div.selection-mode::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    display: block;
+    background: url(../../../assets/img/check_box_outline_blank_FILL0_wght400_GRAD0_opsz48.svg) center center/contain no-repeat fixed padding-box border-box #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 6px;
+}
+
+#dashboard-list > div.selected::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    display: block;
+    background: url(../../../assets/img/check_box_FILL0_wght400_GRAD0_opsz48.svg) center center/contain no-repeat fixed padding-box border-box #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 6px;
 }
 
 #dashboard-list > div > span.item-header-span {

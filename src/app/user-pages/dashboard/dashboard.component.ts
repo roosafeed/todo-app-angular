@@ -32,6 +32,17 @@ export class DashboardComponent implements OnInit {
       next: (data) => {
         if(data instanceof RecordResp) {
           this.records = data.records;
+          this.records.forEach((record) => {
+            record.items.sort((a, b) => {
+              if(a.isComplete) {
+                return 1;
+              }
+              if(b.isComplete) {
+                return -1;
+              }
+              return a.order - b.order;
+            })
+          })
         }                      
       },
       error: (err) => {

@@ -3,17 +3,20 @@ export class ToDoRecord {
     public title: string;
     public color: string;
     public items: RecordItem[];
+    public createdOn: Date;
 
     constructor(
         key: string|null = null,
         title: string = '',
         color: string = '#005fae',
-        items: RecordItem[] = []
+        items: RecordItem[] = [],
+        createdOn: Date = new Date(Date.now())
     ) {
         this.key = key;
         this.color = color;
         this.items = items;
         this.title = title;
+        this.createdOn = createdOn;
     }
 }
 

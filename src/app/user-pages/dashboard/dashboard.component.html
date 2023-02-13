@@ -4,8 +4,8 @@
             <img src="../../../assets/img/add_FILL0_wght400_GRAD0_opsz48.svg" alt="add">
         </button>
         <button id="dashboard-bttn-sel" (click)="selectionClick()"> 
-            <img *ngIf="!selectionMode" src="../../../assets/img/check_box_outline_blank_FILL0_wght400_GRAD0_opsz48.svg" alt="delete">
-            <img *ngIf="selectionMode" src="../../../assets/img/check_box_FILL0_wght400_GRAD0_opsz48.svg" alt="delete">
+            <img *ngIf="!selectionMode" src="../../../assets/img/check_box_outline_blank_FILL0_wght400_GRAD0_opsz48.svg" alt="select" title="Select multiple">
+            <img *ngIf="selectionMode" src="../../../assets/img/check_box_FILL0_wght400_GRAD0_opsz48.svg" alt="select" title="Remove selection">
         </button>
         <button *ngIf="selectionMode" id="dashboard-bttn-del" (click)="deleteSelectedRecords()" 
         [disabled]="selectionMode && selectedKeys.size > 0 ? '' : 'disabled'">Delete 
@@ -15,7 +15,7 @@
 
     <div id="dashboard-list">
         <div #thisEl *ngFor="let record of records; index as i" [ngStyle]="{'background-color': record.color + '55', '--user-color': record.color}" 
-        (click)="listClick(thisEl, record.key)">
+        (click)="listClick(thisEl, record.key)" [ngClass]="selectionMode? 'selection-mode' : ''">
             <span class="item-header-span" [ngStyle]="{'background-color': record.color}"></span>
             <h3>{{record.title}}</h3>
             <ol>

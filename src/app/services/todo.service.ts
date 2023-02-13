@@ -27,6 +27,11 @@ export class TodoService {
 
   getRecordDetails(recordId: string): Observable<ToDoRecord | HttpError> {
     return this.http.get<ToDoRecord>(BASE_URL + `/${recordId}`).pipe(
+      map((data: any) => {
+        const r = data.resp.records[0];
+        const rec = new ToDoRecord(r.key, r.title, r.color, r.items, new Date(r.createdOn));
+        return rec;
+      }),
       catchError(this.handleError)
     )
   }

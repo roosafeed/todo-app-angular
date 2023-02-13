@@ -1,6 +1,42 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of movies" cdkDrag>
-      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-      <!-- {{movie}} -->
-    </div>
+<div id="record-details-main" *ngIf="record.key">
+  <div id="record-details-header">
+    <div>
+      <h2>{{record.title}}</h2>
+      <span>Created on {{record.createdOn | date: 'EEE, MMM d, yyyy h:mm a'}}</span>
+    </div>    
   </div>
+
+  <div id="record-list-main">
+    
+    <div [ngStyle]="{'--record-color': record.color + '55'}" *ngFor="let item of record.items; index as i" class="record-list-box">
+      <div id="checkbox" [ngClass]="item.isComplete? 'completed' : ''" (click)="setComplete(i)">
+        <img *ngIf="!item.isComplete" src="../../../assets/img/check_box_outline_blank_FILL0_wght400_GRAD0_opsz48.svg" alt="select" title="Mark as done">
+        <img *ngIf="item.isComplete" src="../../../assets/img/check_box_FILL0_wght400_GRAD0_opsz48.svg" alt="select" title="Mark as not done">
+      </div>
+      <div [ngClass]="item.isComplete? 'completed' : ''">
+        <h3>{{item.name}}</h3>
+        <span *ngIf="item.completeBy">Due <b>{{item.completeBy | date: 'EEE, MMM d, yyyy h:mm a'}}</b></span>
+      </div>
+      <div>
+        <span>
+          <img src="../../../assets/img/edit_FILL0_wght400_GRAD0_opsz48.svg" alt="Edit" title="Edit this item">
+        </span>
+        <span>
+          <img src="../../../assets/img/delete_forever_FILL0_wght400_GRAD0_opsz48.svg" alt="Delete" title="Delete this item" (click)="deleteItem(i)">
+        </span>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<!-- <div id="record-list-main" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    
+  <div *ngFor="let item of record.items; index as i" class="example-box" cdkDrag>
+    <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+    <h3>{{item.name}}</h3>
+  </div>
+  
+</div> -->

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MessagingService } from 'src/app/services/messaging.service';
 import { UserService } from 'src/app/services/user.service';
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
       if(event instanceof NavigationStart) {
         this.isLoading = true;
       }
-      if(event instanceof NavigationEnd) {
+      if(event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
           this.isLoggedIn = this.userService.isAuthenticated();  
           this.isLoading = false;        
       }
@@ -58,6 +58,14 @@ export class NavbarComponent implements OnInit {
   goBack(): void {
     if(this.canGoBack) {
       this.location.back();
+    }
+    else {
+      if(this.isLoggedIn) {
+        this.router.navigate(['dashboard']);
+      }
+      else {
+        this.router.navigate(['home']);
+      }
     }
   }
 }
