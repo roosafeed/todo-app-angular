@@ -5,7 +5,7 @@ import { HttpError } from '../models/http-error.model';
 import { RecordResp } from '../models/record-resp.model';
 import { ToDoRecord } from '../models/record.model';
 
-const BASE_URL = "https://todo-server.deta.dev/todo";
+const BASE_URL = "https://bishopsagenda-1-g6967629.deta.app/todo";
 
 @Injectable({
   providedIn: 'root'
